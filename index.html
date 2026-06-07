@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>متابع شرب الماء</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="today-panel" aria-labelledby="today-title">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">اليوم</p>
+            <h1 id="today-title">متابع الماء</h1>
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" id="themeToggleButton" type="button" aria-label="تبديل الوضع الليلي" title="تبديل الوضع الليلي">
+              ☾
+            </button>
+            <button class="icon-button" id="resetDayButton" type="button" aria-label="تصفير اليوم" title="تصفير اليوم">
+              ↺
+            </button>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-ring" role="img" aria-label="نسبة إنجاز الهدف اليومي">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="track" cx="80" cy="80" r="68"></circle>
+              <circle class="fill" id="progressCircle" cx="80" cy="80" r="68"></circle>
+            </svg>
+            <div class="progress-copy">
+              <strong id="percentText">0%</strong>
+              <span>من الهدف</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="amount-summary">
+          <span id="drunkText">0 مل</span>
+          <small>من</small>
+          <span id="goalText">2000 مل</span>
+        </div>
+
+        <div class="quick-actions" aria-label="إضافة كمية ماء">
+          <button type="button" data-add="150">+150 مل</button>
+          <button type="button" data-add="250">+250 مل</button>
+          <button type="button" data-add="500">+500 مل</button>
+        </div>
+
+        <form class="custom-add" id="customAddForm">
+          <label for="customAmount">كمية مخصصة</label>
+          <div class="input-row">
+            <input id="customAmount" name="customAmount" type="number" min="1" max="5000" inputmode="numeric" placeholder="مثال: 300" />
+            <button type="submit">إضافة</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="settings-panel" aria-labelledby="settings-title">
+        <div class="panel-heading">
+          <h2 id="settings-title">الإعدادات</h2>
+          <p id="dateText"></p>
+        </div>
+
+        <form class="goal-form" id="goalForm">
+          <label for="dailyGoal">الهدف اليومي</label>
+          <div class="input-row">
+            <input id="dailyGoal" name="dailyGoal" type="number" min="250" max="10000" step="50" inputmode="numeric" />
+            <button type="submit">حفظ</button>
+          </div>
+        </form>
+
+        <div class="stats-grid">
+          <div>
+            <span id="remainingText">2000 مل</span>
+            <small>المتبقي</small>
+          </div>
+          <div>
+            <span id="entriesCount">0</span>
+            <small>مرات التسجيل</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="history-panel" aria-labelledby="history-title">
+        <div class="panel-heading">
+          <h2 id="history-title">سجل اليوم</h2>
+          <button class="text-button" id="undoButton" type="button">تراجع</button>
+        </div>
+        <ol class="history-list" id="historyList"></ol>
+      </section>
+
+      <section class="week-panel" aria-labelledby="week-title">
+        <div class="panel-heading">
+          <h2 id="week-title">آخر 7 أيام</h2>
+          <span id="weekAverage">متوسط 0 مل</span>
+        </div>
+        <div class="week-bars" id="weekBars" aria-label="استهلاك الماء خلال الأسبوع"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
