@@ -1,106 +1,32 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>متابع شرب الماء</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="app-shell">
-      <section class="today-panel" aria-labelledby="today-title">
-        <div class="topbar">
-          <div>
-            <p class="eyebrow">اليوم</p>
-            <h1 id="today-title">متابع الماء</h1>
-          </div>
-          <div class="top-actions">
-            <button class="icon-button" id="themeToggleButton" type="button" aria-label="تبديل الوضع الليلي" title="تبديل الوضع الليلي">
-              ☾
-            </button>
-            <button class="icon-button" id="resetDayButton" type="button" aria-label="تصفير اليوم" title="تصفير اليوم">
-              ↺
-            </button>
-          </div>
-        </div>
-
-        <div class="progress-wrap">
-          <div class="progress-ring" role="img" aria-label="نسبة إنجاز الهدف اليومي">
-            <svg viewBox="0 0 160 160" aria-hidden="true">
-              <circle class="track" cx="80" cy="80" r="68"></circle>
-              <circle class="fill" id="progressCircle" cx="80" cy="80" r="68"></circle>
-            </svg>
-            <div class="progress-copy">
-              <strong id="percentText">0%</strong>
-              <span>من الهدف</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="amount-summary">
-          <span id="drunkText">0 مل</span>
-          <small>من</small>
-          <span id="goalText">2000 مل</span>
-        </div>
-
-        <div class="quick-actions" aria-label="إضافة كمية ماء">
-          <button type="button" data-add="150">+150 مل</button>
-          <button type="button" data-add="250">+250 مل</button>
-          <button type="button" data-add="500">+500 مل</button>
-        </div>
-
-        <form class="custom-add" id="customAddForm">
-          <label for="customAmount">كمية مخصصة</label>
-          <div class="input-row">
-            <input id="customAmount" name="customAmount" type="number" min="1" max="5000" inputmode="numeric" placeholder="مثال: 300" />
-            <button type="submit">إضافة</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="settings-panel" aria-labelledby="settings-title">
-        <div class="panel-heading">
-          <h2 id="settings-title">الإعدادات</h2>
-          <p id="dateText"></p>
-        </div>
-
-        <form class="goal-form" id="goalForm">
-          <label for="dailyGoal">الهدف اليومي</label>
-          <div class="input-row">
-            <input id="dailyGoal" name="dailyGoal" type="number" min="250" max="10000" step="50" inputmode="numeric" />
-            <button type="submit">حفظ</button>
-          </div>
-        </form>
-
-        <div class="stats-grid">
-          <div>
-            <span id="remainingText">2000 مل</span>
-            <small>المتبقي</small>
-          </div>
-          <div>
-            <span id="entriesCount">0</span>
-            <small>مرات التسجيل</small>
-          </div>
-        </div>
-      </section>
-
-      <section class="history-panel" aria-labelledby="history-title">
-        <div class="panel-heading">
-          <h2 id="history-title">سجل اليوم</h2>
-          <button class="text-button" id="undoButton" type="button">تراجع</button>
-        </div>
-        <ol class="history-list" id="historyList"></ol>
-      </section>
-
-      <section class="week-panel" aria-labelledby="week-title">
-        <div class="panel-heading">
-          <h2 id="week-title">آخر 7 أيام</h2>
-          <span id="weekAverage">متوسط 0 مل</span>
-        </div>
-        <div class="week-bars" id="weekBars" aria-label="استهلاك الماء خلال الأسبوع"></div>
-      </section>
-    </main>
-
-    <script src="app.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>متابع الماء</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#eefaff;--ink:#12313d;--muted:#607a86;--line:#cde7f0;--panel:rgba(255,255,255,.84);--field:#fff;--primary:#0797c8;--primary-dark:#066a9b;--soft:#dff7ff;--green:#33c987;--shadow:0 22px 54px rgba(7,86,122,.15);--water:linear-gradient(135deg,#0e8fd1,#21c4de 52%,#7be7ff)}
+    body.dark{--bg:#071a24;--ink:#eefbff;--muted:#9ec4d0;--line:#20475b;--panel:rgba(10,31,42,.9);--field:#0a222e;--primary:#39c9ff;--primary-dark:#97eaff;--soft:#123647;--shadow:0 22px 54px rgba(0,0,0,.34)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 18% 12%,rgba(72,203,240,.35),transparent 30%),radial-gradient(circle at 82% 0%,rgba(13,126,211,.24),transparent 34%),var(--bg);color:var(--ink);font-family:Tajawal,Tahoma,Arial,sans-serif}button,input,select,textarea{font:inherit}button{border:0;cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 28px));margin:auto}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:900;font-size:1.18rem}.nav a:not(.brand){color:var(--muted);font-weight:800;margin-inline-start:12px}.hero{min-height:620px;display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.75fr);gap:28px;align-items:center}.hero-copy{display:grid;gap:18px}.pill{width:max-content;margin:0;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.55);color:var(--primary-dark);font-weight:900}.hero h1{max-width:760px;margin:0;font-size:clamp(2.8rem,8vw,6.5rem);line-height:.95}.lead{max-width:620px;margin:0;color:var(--muted);font-size:clamp(1.05rem,2.5vw,1.35rem);line-height:1.75}.actions,.share-actions{display:flex;gap:12px;flex-wrap:wrap}.primary,.secondary,.share-actions button,.share-actions a,.waitlist button,.app button{min-height:50px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;padding:0 18px;font-weight:900}.primary,.waitlist button,.app button.main{background:var(--water);color:white;box-shadow:0 14px 30px rgba(7,151,200,.22)}.secondary,.share-actions a,.share-actions button,.app .ghost{background:var(--soft);color:var(--primary-dark)}.trust{display:flex;gap:8px;flex-wrap:wrap}.trust span{border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.55);color:var(--muted);padding:8px 12px;font-weight:800}.phone{width:min(320px,100%);min-height:520px;border:1px solid var(--line);border-radius:32px;background:var(--panel);box-shadow:var(--shadow);padding:26px;display:grid;align-content:center;justify-items:center;gap:16px}.phone strong{font-size:5rem;line-height:1}.bars{width:100%;height:120px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end}.bars span{border-radius:999px 999px 8px 8px;background:var(--water)}.section{padding:28px 0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.waitlist,.share,.app{border:1px solid var(--line);border-radius:8px;background:var(--panel);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.card{padding:20px;display:grid;gap:8px}.card strong{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--primary-dark)}.card p,.wait-copy p,.note{color:var(--muted);line-height:1.7}.waitlist{padding:24px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(320px,1fr);gap:24px;align-items:center}.wait-form{display:grid;gap:9px}.wait-form input,.wait-form select,.share textarea,.app input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:8px;padding:0 14px;color:var(--ink);background:var(--field)}.note.ok{color:var(--green);font-weight:900}.share{padding:24px;display:grid;gap:16px}.share textarea{min-height:92px;padding:14px;line-height:1.7}.app-shell{width:min(620px,calc(100% - 22px));margin:auto;padding:28px 0}.app{padding:24px;min-height:calc(100vh - 40px)}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.icon{width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--primary-dark);font-size:1.3rem}.ring{width:min(330px,100%);aspect-ratio:1;margin:28px auto;position:relative}.ring svg{width:100%;height:100%;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:13}.track{stroke:#d8edf5}.fill{stroke:#21c4de;stroke-linecap:round;stroke-dasharray:427.26;stroke-dashoffset:427.26;transition:.25s}.pct{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.pct strong{font-size:4.4rem}.summary{text-align:center;font-size:1.35rem;font-weight:900}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.row{display:flex;gap:10px}.row button{flex:0 0 92px}.mini{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.history{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}.history li{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:rgba(255,255,255,.45)}@media(max-width:840px){.hero,.waitlist{grid-template-columns:1fr}.hero{min-height:auto;padding:24px 0}.cards{grid-template-columns:1fr}.phone{min-height:410px}.wrap{width:min(100% - 22px,620px)}}@media(max-width:430px){.actions,.share-actions,.primary,.secondary,.share-actions button,.share-actions a{width:100%}.quick{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="wrap" id="top">
+    <nav class="nav"><a class="brand" href="#top">متابع الماء</a><div><a href="#app">جرّب الآن</a><a href="#waitlist">نسخة iPhone</a></div></nav>
+    <section class="hero">
+      <div class="hero-copy"><p class="pill">نسخة تجريبية مجانية</p><h1>تابع شرب الماء يوميًا قبل ما تنسى</h1><p class="lead">حدد هدفك، سجل كل كوب بسرعة، وشاهد تقدمك خلال اليوم. نسخة iPhone وميزات Pro قادمة، وسعر الإطلاق سيكون للأوائل.</p><div class="actions"><a class="primary" href="#app">جرّب التطبيق</a><a class="secondary" href="#waitlist">انضم لقائمة iPhone</a></div><div class="trust"><span>بدون حساب</span><span>يعمل من الجوال</span><span>بيانات التجربة على جهازك</span></div></div>
+      <div class="phone"><span>اليوم</span><strong>68%</strong><small>من هدفك اليومي</small><div class="bars"><span style="height:46%"></span><span style="height:72%"></span><span style="height:31%"></span><span style="height:90%"></span><span style="height:58%"></span></div><button class="main" type="button">+250 مل</button></div>
+    </section>
+  </header>
+  <section class="wrap section"><p class="pill">كيف نجيب المستخدمين؟</p><h2>الصفحة مصممة لتجربة، تسجيل اهتمام، ومشاركة</h2><div class="cards"><article class="card"><strong>1</strong><h3>الزائر يجرب فورًا</h3><p>ما يحتاج تحميل أو حساب. يدخل الرابط ويجرب تتبع الماء مباشرة.</p></article><article class="card"><strong>2</strong><h3>نسجل المهتمين</h3><p>نموذج قائمة انتظار لنسخة iPhone وPro مرتبط بـ Google Form.</p></article><article class="card"><strong>3</strong><h3>نطلب المشاركة</h3><p>أزرار واتساب ونسخ رابط تساعد كل زائر يرسل التجربة لأصحابه.</p></article></div></section>
+  <section class="wrap section waitlist" id="waitlist"><div class="wait-copy"><p class="pill">قائمة الإطلاق</p><h2>احجز مكانك في نسخة iPhone</h2><p>أول المهتمين يحصلون على إشعار الإطلاق وسعر مبكر لميزات Pro. هذه القائمة تساعدنا نعرف هل نرفع التطبيق للأب ستور الآن أو نطوره أكثر.</p></div><form class="wait-form" id="waitlistForm"><label for="leadName">الاسم</label><input id="leadName" name="leadName" placeholder="مثال: محمد" required><label for="leadContact">واتساب أو إيميل</label><input id="leadContact" name="leadContact" placeholder="05xxxxxxxx أو email@example.com" required><label for="leadDevice">جهازك الحالي</label><select id="leadDevice"><option>iPhone</option><option>Android</option><option>الاثنين</option></select><button type="submit">انضم للقائمة</button><p class="note" id="waitlistMessage">لن نرسل رسائل مزعجة. فقط تحديثات الإطلاق والتجربة.</p></form></section>
+  <section class="wrap section share"><div><p class="pill">ساعدنا نختبر الفكرة</p><h2>أرسل الرابط لشخص ينسى يشرب ماء</h2></div><div class="share-actions"><button type="button" id="shareButton">مشاركة الرابط</button><a id="whatsappShare" href="#" target="_blank" rel="noopener">إرسال واتساب</a><button type="button" id="copyLinkButton">نسخ الرابط</button></div><textarea id="shareText" readonly></textarea></section>
+  <main class="app-shell" id="app"><section class="app"><div class="top"><div><p class="pill">اليوم</p><h2>متابع الماء</h2></div><div><button class="icon" id="themeToggleButton" title="تبديل الوضع الليلي">☾</button><button class="icon" id="resetDayButton" title="تصفير اليوم">↺</button></div></div><div class="ring"><svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="68"></circle><circle class="fill" id="progressCircle" cx="80" cy="80" r="68"></circle></svg><div class="pct"><strong id="percentText">0%</strong><span>من الهدف</span></div></div><div class="summary"><span id="drunkText">0 مل</span> <small>من</small> <span id="goalText">2 لتر</span></div><div class="quick"><button class="main" data-add="150">+150 مل</button><button class="main" data-add="250">+250 مل</button><button class="main" data-add="500">+500 مل</button></div><form id="customAddForm"><label for="customAmount">كمية مخصصة</label><div class="row"><input id="customAmount" type="number" min="1" max="5000" placeholder="مثال: 300"><button class="main" type="submit">إضافة</button></div></form><div class="mini"><h3>الإعدادات</h3><form id="goalForm" class="row"><input id="dailyGoal" type="number" min="250" max="10000" step="50"><button class="ghost" type="submit">حفظ</button></form><p>المتبقي: <strong id="remainingText">2 لتر</strong> | مرات التسجيل: <strong id="entriesCount">0</strong></p></div><div class="mini"><h3>سجل اليوم <button class="ghost" id="undoButton" type="button">تراجع</button></h3><ol class="history" id="historyList"></ol></div></section></main>
+<script>
+const WAITLIST_FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLSfcxnCZBv6OARE0-nBBURwlgx_j-m0tWUOcLxykrrApS2-IrQ/viewform?usp=header";const KEY="water-tracker-state-v1",LEN=427.26;let state=load();const $=id=>document.getElementById(id);function load(){try{return JSON.parse(localStorage.getItem(KEY))||{goal:2000,days:{},theme:"light"}}catch{return{goal:2000,days:{},theme:"light"}}}function save(){localStorage.setItem(KEY,JSON.stringify(state))}function k(d=new Date){return d.toISOString().slice(0,10)}function entries(){let key=k();return state.days[key]||(state.days[key]=[])}function sum(a){return a.reduce((t,e)=>t+Number(e.amount||0),0)}function fmt(n){if(n>=1000){let l=n/1000;return `${Number.isInteger(l)?l:l.toFixed(1)} لتر`}return `${n} مل`}function add(n){n=Math.round(Number(n));if(!n||n<1)return;entries().push({amount:n,at:new Date().toISOString()});save();render()}function render(){let e=entries(),total=sum(e),pct=Math.min(Math.round(total/state.goal*100),100);$("progressCircle").style.strokeDashoffset=String(LEN-LEN*pct/100);$("percentText").textContent=pct+"%";$("drunkText").textContent=fmt(total);$("goalText").textContent=fmt(state.goal);$("remainingText").textContent=fmt(Math.max(state.goal-total,0));$("entriesCount").textContent=e.length;$("dailyGoal").value=state.goal;$("undoButton").disabled=!e.length;$("historyList").innerHTML=e.length?e.slice().reverse().map(x=>`<li><strong>${fmt(x.amount)}</strong><span>${new Intl.DateTimeFormat("ar-SA",{hour:"2-digit",minute:"2-digit"}).format(new Date(x.at))}</span></li>`).join(""):`<li>لا يوجد تسجيل حتى الآن</li>`}function setTheme(t){state.theme=t==="dark"?"dark":"light";document.body.classList.toggle("dark",state.theme==="dark");$("themeToggleButton").textContent=state.theme==="dark"?"☀":"☾";save()}function landing(){let u=new URL(location.href);u.hash="";if(!u.searchParams.has("ref"))u.searchParams.set("ref","friend");return u.toString()}function shareMsg(){return `جربت تطبيق بسيط لمتابعة شرب الماء يوميًا. حدد هدفك وسجل شربك من الجوال:\n${landing()}`}function setupShare(){let m=shareMsg();$("shareText").value=m;$("whatsappShare").href=`https://wa.me/?text=${encodeURIComponent(m)}`}document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(b.dataset.add));$("customAddForm").onsubmit=e=>{e.preventDefault();add($("customAmount").value);$("customAmount").value=""};$("goalForm").onsubmit=e=>{e.preventDefault();let g=Math.round(Number($("dailyGoal").value));if(g>=250){state.goal=g;save();render()}};$("resetDayButton").onclick=()=>{state.days[k()]=[];save();render()};$("undoButton").onclick=()=>{entries().pop();save();render()};$("themeToggleButton").onclick=()=>setTheme(state.theme==="dark"?"light":"dark");$("waitlistForm").onsubmit=e=>{e.preventDefault();let u=new URL(WAITLIST_FORM_URL);u.searchParams.set("name",$("leadName").value.trim());u.searchParams.set("contact",$("leadContact").value.trim());u.searchParams.set("device",$("leadDevice").value);u.searchParams.set("source",new URLSearchParams(location.search).get("ref")||"direct");window.open(u.toString(),"_blank","noopener");$("waitlistMessage").textContent="تم فتح نموذج التسجيل. أرسله هناك حتى تصلنا بياناتك.";$("waitlistMessage").classList.add("ok")};$("shareButton").onclick=async()=>{if(navigator.share)await navigator.share({title:"متابع الماء",text:"جرب تطبيق متابعة شرب الماء اليومي.",url:landing()});else copy()};async function copy(){await navigator.clipboard.writeText(shareMsg());$("copyLinkButton").textContent="تم النسخ";setTimeout(()=>$("copyLinkButton").textContent="نسخ الرابط",1600)}$("copyLinkButton").onclick=copy;setTheme(state.theme);setupShare();render();
+</script>
+</body>
 </html>
